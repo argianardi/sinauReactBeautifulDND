@@ -1,20 +1,6 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 
-function bgcolorChange(props) {
-  return props.isDragging
-    ? 'lightgreen'
-    : props.isDraggable
-    ? props.isBacklog
-      ? '#F2D7D5'
-      : '#DCDCDC'
-    : props.isBacklog
-    ? '#F2D7D5'
-    : '#FFFADA';
-}
-
-// handle color task
-
 const Task = ({ task, index }) => {
   return (
     <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
@@ -23,9 +9,8 @@ const Task = ({ task, index }) => {
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
-          isDragging={snapshot.isDragging}
           className={`${
-            snapshot.isDragging && 'bg-green-400'
+            snapshot.isDragging ? 'bg-blue-400' : 'bg-transparent'
           } rounded-md transition-all duration-1000`}
         >
           <div className="flex items-center justify-between gap-2 px-2 py-6 shadow-md border-[1px] border-gray-200">
@@ -36,7 +21,6 @@ const Task = ({ task, index }) => {
               <img
                 className="w-6 h-6"
                 src={'https://joesch.moe/api/v1/random?key=' + task.id}
-                onClick={() => console.log(task)}
               />
             </figure>
           </div>
