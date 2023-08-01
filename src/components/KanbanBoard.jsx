@@ -48,15 +48,8 @@ const KanbanBoard = () => {
 
   return (
     <DragDropContext onDragEnd={handleDragEnd}>
-      <h2 style={{ textAlign: 'center' }}>PROGRESS BOARDS</h2>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexDirection: 'row',
-        }}
-      >
+      <h2 className="my-3 text-center">PROGRESS BOARDS</h2>
+      <div className="flex justify-center gap-8">
         <Column title={'To do'} tasks={inCompleted} id={'1'} />
         <Column title={'Done'} tasks={completed} id={'2'} />
         <Column title={'BackLog'} tasks={[]} id={'3'} />

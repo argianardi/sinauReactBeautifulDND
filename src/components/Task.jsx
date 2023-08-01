@@ -1,31 +1,5 @@
 import React from 'react';
-import { styled } from 'styled-components';
 import { Draggable } from 'react-beautiful-dnd';
-import { Avatar } from 'antd';
-
-const Container = styled.div`
-  box-shadow: 5px 5px 5px 2px grey;
-  border-radius: 10px;
-  padding: 8px;
-  color: #000;
-  margin-bottom: 8px;
-  min-height: 90px;
-  margin-left: 10px;
-  margin-right: 10px;
-  background-color: ${(props) => bgcolorChange(props)};
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-`;
-
-const TextContent = styled.div``;
-
-const Icons = styled.div`
-  display: flex;
-  justify-content: end;
-  padding: 2px;
-`;
 
 function bgcolorChange(props) {
   return props.isDragging
@@ -39,36 +13,36 @@ function bgcolorChange(props) {
     : '#FFFADA';
 }
 
+// handle color task
+
 const Task = ({ task, index }) => {
   return (
     <Draggable draggableId={`${task.id}`} key={task.id} index={index}>
       {(provided, snapshot) => (
-        <Container
+        <div
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           ref={provided.innerRef}
           isDragging={snapshot.isDragging}
+          className={`${
+            snapshot.isDragging && 'bg-green-400'
+          } rounded-md transition-all duration-1000`}
         >
-          <div style={{ display: 'flex', justifyContent: 'start', padding: 2 }}>
-            <span>
-              <small>#{task.id}</small>
-            </span>
-          </div>
-          <div
-            style={{ display: 'flex', justifyContent: 'center', padding: 2 }}
-          >
-            <TextContent>{task.title}</TextContent>
-          </div>
-          <Icons>
-            <div>
-              <Avatar
+          <div className="flex items-center justify-between gap-2 px-2 py-6 shadow-md border-[1px] border-gray-200">
+            <h3 className="w-4/5 text-xs text-start">
+              {task.id}. {task.title}
+            </h3>
+            <figure className="-mt-6 border-[1px] border-gray-600 w-6 h-6 overflow-hidden rounded-full">
+              <img
+                className="w-6 h-6"
                 src={'https://joesch.moe/api/v1/random?key=' + task.id}
                 onClick={() => console.log(task)}
               />
-            </div>
-          </Icons>
+            </figure>
+          </div>
+
           {provided.placeholder}
-        </Container>
+        </div>
       )}
     </Draggable>
   );
