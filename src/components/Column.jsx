@@ -9,7 +9,7 @@ const Column = ({ title, tasks, id }) => {
       <Droppable droppableId={id}>
         {(provided, snapshot) => (
           <div
-            className="p-1 min-h-[100px]"
+            className="p-1 min-h-[100px] flex flex-col gap-3"
             ref={provided.innerRef}
             {...provided.droppableProps}
             isDraggingOver={snapshot.isDraggingOver}
